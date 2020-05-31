@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:kwusenexercise/models/place_info.dart';
@@ -13,7 +14,8 @@ class PlaceInfoService {
     return json.map((placeInfo) => PlaceInfo.fromJson(placeInfo)).toList();
   }
 
-  List<Polyline> createPolygons(List<PlaceInfo> places){
+  // Create Polygons for showing on the map
+  List<Polyline> createPolygons(List<PlaceInfo> places) {
     var polygons = List<Polyline>();
 
     places.forEach((place) {
@@ -27,5 +29,25 @@ class PlaceInfoService {
     });
 
     return polygons;
+  }
+
+  // Create text box to show information
+  List<TextSpan> createText(List<PlaceInfo> places) {
+    List<TextSpan> textContens = List<TextSpan>();
+
+    places.forEach((place) {
+      var icon = TextSpan(
+        text: '■',
+        style: TextStyle(color: Hexcolor(place.properties.color), fontSize: 20),
+      );
+      textContens.add(icon);
+      var text = TextSpan(
+        text: '${place.properties.name} \n',
+        style: TextStyle(color: Colors.black, fontSize: 20),
+      );
+      textContens.add(text);
+    });
+
+    return textContens;
   }
 }
