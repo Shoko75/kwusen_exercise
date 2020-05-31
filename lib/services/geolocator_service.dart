@@ -13,5 +13,6 @@ class GeoLocatorService {
           desiredAccuracy: LocationAccuracy.high,
           locationPermissionLevel: GeolocationPermission.location);
     }
+
   }
 }
