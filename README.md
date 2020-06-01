@@ -1,7 +1,4 @@
-# kwusenexercise
-
-kwusen exercise
-
+# Kwusen exercise
 ## Functions
 - Show polygons on the map
 - Zoom out automatically to contain all polygons
