@@ -5,8 +5,9 @@ import 'package:kwusenexercise/models/place_info.dart';
 import 'package:latlong/latlong.dart';
 
 class WidgetMakerService {
-  // Create Polygons for showing on the map
-  List<Polyline> createPolygons(List<PlaceInfo> places) {
+
+  // Create Polygons for showing on the map from the list of placeInfo and return PolylineLayerOptions
+  PolylineLayerOptions createPolygons(List<PlaceInfo> places) {
     var polygons = List<Polyline>();
 
     places.forEach((place) {
@@ -19,29 +20,32 @@ class WidgetMakerService {
       polygons.add(polygon);
     });
 
-    return polygons;
+    var polylineLayerOptions = new PolylineLayerOptions(polylines: polygons);
+
+    return polylineLayerOptions;
   }
 
-  // Create text box to show information
+  // Create content to show on the information text field and return list of TextSpan.
   List<TextSpan> createText(List<PlaceInfo> places) {
-    List<TextSpan> textContens = List<TextSpan>();
+    List<TextSpan> textContents = List<TextSpan>();
 
     places.forEach((place) {
       var icon = TextSpan(
         text: '■',
         style: TextStyle(color: Hexcolor(place.properties.color), fontSize: 20),
       );
-      textContens.add(icon);
+      textContents.add(icon);
       var text = TextSpan(
         text: '${place.properties.name} \n',
         style: TextStyle(color: Colors.black, fontSize: 20),
       );
-      textContens.add(text);
+      textContents.add(text);
     });
 
-    return textContens;
+    return textContents;
   }
 
+  // Create bounds from list of coordinates and return bounds.
   LatLngBounds createBonds(List<PlaceInfo> places) {
     var bounds = LatLngBounds();
 
@@ -52,21 +56,5 @@ class WidgetMakerService {
     });
 
     return bounds;
-  }
-
-  LatLng centroid(List<LatLng> points) {
-    List<double> centroid = [0.0,0.0];
-
-    for (int i = 0; i < points.length; i++) {
-      centroid[0] += points[i].latitude;
-      centroid[1] += points[i].longitude;
-    }
-
-    int totalPoints = points.length;
-    centroid[0] = centroid[0] / totalPoints;
-    centroid[1] = centroid[1] / totalPoints;
-
-    var latLng = new LatLng(centroid[0],centroid[1]);
-    return latLng;
   }
 }

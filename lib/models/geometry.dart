@@ -5,8 +5,8 @@ class Geometry {
 
   Geometry({this.coordinates});
 
+  // Create geometry data which contain a list of coordinates
   factory Geometry.fromJson(Map<dynamic, dynamic> parsedJson) {
-      return Geometry(
-        coordinates : Coordinates.fromJson(parsedJson['coordinates']));
-      }
+    return Geometry(coordinates : Coordinates.fromJson(parsedJson['coordinates']));
+  }
 }

@@ -6,6 +6,7 @@ class Properties {
 
   Properties({this.name, this.color});
 
+  // Create properties which contain name and color
   factory Properties.fromJson(Map<dynamic,dynamic> parsedJson) {
    return Properties(
        name : parsedJson['Name'],
